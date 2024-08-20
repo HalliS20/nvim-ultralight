@@ -2,8 +2,6 @@
 return {
     {
         { "shaunsingh/oxocarbon.nvim" },
-        { "ellisonleao/gruvbox.nvim" },
-        { "rose-pine/neovim",         name = "rose-pine" },
         {
             "folke/tokyonight.nvim", --   priority = 1000,
             opts = function()
@@ -22,29 +20,6 @@ return {
                         "startuptime",
                         "Outline",
                     },
-                    on_colors = function(c)
-                        -- local hsluv = require("tokyonight.hsluv")
-                        -- local function randomColor(color)
-                        --   if color ~= "NONE" then
-                        --     local hsl = hsluv.hex_to_hsluv(color)
-                        --     hsl[1] = math.random(0, 360)
-                        --     return hsluv.hsluv_to_hex(hsl)
-                        --   end
-                        --   return color
-                        -- end
-                        -- local function set(colors)
-                        --   if type(colors) == "table" then
-                        --     for k, v in pairs(colors) do
-                        --       if type(v) == "string" then
-                        --         colors[k] = randomColor(v)
-                        --       elseif type(v) == "table" then
-                        --         set(v)
-                        --       end
-                        --     end
-                        --   end
-                        -- end
-                        -- set(c)
-                    end,
                     on_highlights = function(hl, c)
                         hl.CursorLine = { bg = c.bg_dark }
                         hl.CursorLineNr = { fg = c.orange, bold = true }
