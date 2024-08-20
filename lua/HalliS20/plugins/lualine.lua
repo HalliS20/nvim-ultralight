@@ -3,7 +3,7 @@ local specs = {
     config = require("HalliS20.plugins.Configs.lualine-cfg"),
 }
 
--- return {}
+return {}
 
-return specs
+-- return specs
 
