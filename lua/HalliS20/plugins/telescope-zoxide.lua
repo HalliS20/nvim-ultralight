@@ -3,11 +3,7 @@ return {
     config = function()
         local t = require("telescope")
         local z_utils = require("telescope._extensions.zoxide.utils")
-    
-    
-    
         -- Configure the extension
-    
         t.setup({
             extensions = {
                 zoxide = {
@@ -29,12 +25,8 @@ return {
                 },
             },
         })
-    
         -- Load the extension
         t.load_extension('zoxide')
-    
-    
-    
         -- Add a mapping
         vim.keymap.set("n", "<leader>cd", t.extensions.zoxide.list)
     end
