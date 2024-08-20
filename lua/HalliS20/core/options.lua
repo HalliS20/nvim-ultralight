@@ -37,14 +37,6 @@ opt.swapfile = false
 
 vim.opt.numberwidth = 3
 
------------------------ Integrate NEOtree with NvimTree ------------------------------
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeDirectoryIcon NvimTreeFolderIcon]])
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeDirectoryName NvimTreeFolderName]])
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeSymbolicLinkTarget NvimTreeSymlink]])
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeRootName NvimTreeRootFolder]])
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeDirectoryName NvimTreeOpenedFolderName]])
-vim.cmd([[autocmd ColorScheme * highlight! link NeoTreeFileNameOpened NvimTreeOpenedFile]])
-
 ----------------------- set zsh files to bash syntax for treesitter ------------------------------
 vim.cmd([[autocmd BufNewFile,BufRead *.zsh set filetype=bash]])
 vim.cmd([[
@@ -57,3 +49,5 @@ vim.cmd([[
 
   autocmd BufRead,BufNewFile * call SetFileType()
 ]])
+
+
