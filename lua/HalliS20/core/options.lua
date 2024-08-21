@@ -1,60 +1,24 @@
 local opt = vim.opt -- for conciseness
 
--- line numbers
-opt.relativenumber = true -- show relative line numbers
-opt.number = true         -- shows absolute line number on cursor line (when relative number is on)
+----=====================TAB SETTINGS===========================-----
+local tabsize = 4;       -- SET SIZE HERE
 
-------------------tab code---------------------
-opt.tabstop = 4        -- number of visual spaces per TAB
-opt.shiftwidth = 4     -- number of spaces to use for autoindent
-opt.expandtab = true   -- tabs are spaces
-opt.smarttab = true    -- backspace deletes a 'shiftwidth' amount of spaces
-opt.shiftround = true  -- round indent to multiple of 'shiftwidth'
-opt.smartindent = true -- insert indents automatically
-opt.autoindent = true  -- copy indent from current line when starting new one
------------------------------------------------
-opt.wrap = false       -- set wraping to false
-opt.ignorecase = true
-opt.smartcase = true
-opt.cursorline = true
+opt.tabstop = tabsize    -- number of visual spaces per TAB
+opt.shiftwidth = tabsize -- number of spaces to use for autoindent
+opt.expandtab = true     -- tabs are spaces
+opt.smarttab = true      -- backspace deletes a 'shiftwidth' amount of spaces
+opt.shiftround = true    -- round indent to multiple of 'shiftwidth'
+opt.smartindent = true   -- insert indents automatically
+opt.autoindent = true    -- copy indent from current line when starting new one
 
-
-opt.termguicolors = true
-opt.background = "dark"
-opt.signcolumn = "yes"
-
--- backspace
-opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
-
--- clipboard
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
-
-opt.splitright = true
-opt.splitbelow = true
-
-opt.swapfile = false
-
-vim.opt.numberwidth = 3
-
------------------------ set zsh files to bash syntax for treesitter ------------------------------
-vim.cmd([[autocmd BufNewFile,BufRead *.zsh set filetype=bash]])
-vim.cmd([[
-  function! SetFileType()
-    let l:firstline = getline(1)
-    if l:firstline =~ '^#!/bin/zsh'
-      set filetype=bash
-    endif
-  endfunction
-
-  autocmd BufRead,BufNewFile * call SetFileType()
-]])
-
---------------------------- FORCE TABS -----------------------------
-
-local tabsize = 4;
-
+----======================== FORCE TABS ==============================----
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "make", "go", "c", "cpp", "lua", "python", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+	pattern = {
+		"make", "go", "c", "cpp", "rust",
+		"lua", "python",
+		"javascript", "typescript", "javascriptreact", "typescriptreact",
+		"html", "css", "svelte"
+	},
 	callback = function()
 		vim.opt_local.expandtab = false
 		vim.opt_local.tabstop = tabsize
@@ -62,7 +26,38 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
----------------------------- Maximum PERFORMANCE ----------------------------
+----======================== FOLD SETTINGS ==============================----
+
+
+vim.o.foldcolumn = '1' -- '0' is another option
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+
+----======================== OTHER SETTINGS ==============================----
+-- line numbers
+opt.relativenumber = true -- show relative line numbers
+opt.number = true         -- shows absolute line number on cursor line (when relative number is on)
+
+opt.wrap = false          -- set wraping to false
+opt.ignorecase = true
+opt.smartcase = true
+opt.cursorline = true
+opt.termguicolors = true
+opt.background = "dark"
+opt.signcolumn = "yes"
+-- backspace
+opt.backspace = "indent,eol,start"  -- allow backspace on indent, end of line or insert mode start position
+-- clipboard
+opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+opt.splitright = true
+opt.splitbelow = true
+opt.swapfile = false
+vim.opt.numberwidth = 3
+
+
+----======================= MAXIMUM PERFORMANCE SETTINGS =================================----
 -- autocmd to clear undo history for large files
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -98,3 +93,18 @@ vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
+
+
+----======================= MISCELLANEOUS SETTINGS =================================----
+----------------------- set zsh files to bash syntax for treesitter --------------------
+vim.cmd([[autocmd BufNewFile,BufRead *.zsh set filetype=bash]])
+vim.cmd([[
+  function! SetFileType()
+    let l:firstline = getline(1)
+    if l:firstline =~ '^#!/bin/zsh'
+      set filetype=bash
+    endif
+  endfunction
+
+  autocmd BufRead,BufNewFile * call SetFileType()
+]])
