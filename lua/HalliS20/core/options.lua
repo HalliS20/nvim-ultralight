@@ -14,7 +14,7 @@ opt.shiftround = true  -- round indent to multiple of 'shiftwidth'
 opt.smartindent = true -- insert indents automatically
 opt.autoindent = true  -- copy indent from current line when starting new one
 -----------------------------------------------
-opt.wrap = true        -- set wraping to true
+opt.wrap = false       -- set wraping to true
 opt.ignorecase = true
 opt.smartcase = true
 opt.cursorline = true
