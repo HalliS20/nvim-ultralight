@@ -7,6 +7,8 @@ return {
     vim.keymap.set("n", "_", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
     vim.keymap.set("n","<Leader>l","<CMD>Oil .<CR>", {desc="reload oil buffer"}),
 
+    vim.keymap.set("n","<Leader>.","<CMD>Oil .<CR>", {desc="reload oil buffer"}),
+
 
     preview = {
         max_width = 0.9,

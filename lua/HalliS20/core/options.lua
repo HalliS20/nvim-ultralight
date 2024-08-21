@@ -51,3 +51,39 @@ vim.cmd([[
 ]])
 
 
+---------------------------- Maximum PERFORMANCE ----------------------------
+-- autocmd to clear undo history for large files
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local file_size = vim.fn.getfsize(vim.fn.expand("%"))
+    if file_size > 100000 then  -- 100KB
+      vim.cmd("wundo! " .. vim.fn.expand("%:p:h") .. "/." .. vim.fn.expand("%:t") .. ".un~")
+    end
+  end,
+})
+
+
+-- Periodically clean memory
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    vim.schedule(function()
+      vim.cmd("silent! call luaeval('vim.fn.jobstart([\"sync\"])')")
+    end)
+  end,
+})
+
+-- Set a reasonable limit for undo levels
+vim.opt.undolevels = 1000
+
+-- Enable persistent undo
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.expand('~/.local/share/nvim/undo//')
+
+-- Disable some default plugins if you don't use them
+vim.g.loaded_gzip = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
