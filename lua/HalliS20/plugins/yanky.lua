@@ -1,7 +1,7 @@
 return {
-    "gbprod/yanky.nvim",
+	"gbprod/yanky.nvim",
 
-    config = function()
-        require("yanky").setup()
-    end
+	config = function()
+		require("yanky").setup()
+	end
 }

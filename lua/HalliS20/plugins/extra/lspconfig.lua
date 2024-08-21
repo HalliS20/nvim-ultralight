@@ -8,16 +8,13 @@ return {
 	config = function()
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local keymap = vim.keymap -- for conciseness
 
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
-
 			-- set keybinds
 			opts.desc = "Show LSP references"
 			keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
@@ -103,22 +100,113 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- configure html server
+		lspconfig["html"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach
+		})
+
+		-- configure typescript server with plugin
+		lspconfig["tsserver"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "jsx", "tsx" },
+		})
+
+		-- configure css server
+		lspconfig["cssls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach
+		})
+
+		-- configure tailwindcss server
+		lspconfig["tailwindcss"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach
+		})
+
+		-- configure svelte server
+		lspconfig["svelte"].setup({
+			capabilities = capabilities,
+			on_attach = function(client, bufnr)
+				on_attach(client, bufnr)
+
+				vim.api.nvim_create_autocmd("BufWritePost", {
+					pattern = { "*.js", "*.ts" },
+					callback = function(ctx)
+						if client.name == "svelte" then
+							client.notify("$/onDidChangeTsOrJsFile",
+								{ uri = ctx.file })
+						end
+					end
+				})
+			end
+		})
+
+		-- configure prisma orm server
+		lspconfig["prismals"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach
+		})
+
+		-- setup markdown marksman server
+		lspconfig["marksman"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach
+		})
+
 		lspconfig["bashls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "sh", "zsh", "bash" }
 		})
 
+		-- configure graphql language server
+		lspconfig["graphql"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = {
+				"graphql", "gql", "svelte", "typescriptreact", "javascriptreact"
+			}
+		})
+
+		-- configure emmet language server
+		lspconfig["emmet_ls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = {
+				"html", "typescriptreact", "javascriptreact", "css", "sass",
+				"scss", "less", "svelte"
+			}
+		})
+
+		-- elixir config
+		--Location:  /opt/homebrew/Cellar/elixir-ls/0.21.2/bin
+		lspconfig["elixirls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "elixir" },
+			cmd = { "elixir-ls" }
+		})
+
+		-- configure python server
+		lspconfig["pyright"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "python", "py", "pyc", "pyo", "pyd" }
+		})
+
+		-- config for golang server
+		lspconfig["gopls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "go" }
+		})
 
 		lspconfig["clangd"].setup({
 			cmd = {
-				"clangd",
-				"--background-index",
-				"--suggest-missing-includes",
-				"--clang-tidy",
-				"--header-insertion=iwyu",
-				"--completion-style=detailed",
-				"--function-arg-placeholders",
+				"clangd", "--background-index", "--suggest-missing-includes",
+				"--clang-tidy", "--header-insertion=iwyu"
 			},
 			filetypes = { "c", "cpp", "objc", "objcpp", "hpp", "h" },
 			root_dir = function(fname)
@@ -132,7 +220,7 @@ return {
 				completeUnimported = true,
 				semanticHighlighting = true
 			},
-			on_attach = function(client, bufnr)
+			on_attach = function(_, bufnr)
 				-- Set options for the current buffer
 				vim.bo[bufnr].tabstop = 4
 				vim.bo[bufnr].shiftwidth = 4

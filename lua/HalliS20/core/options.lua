@@ -6,7 +6,6 @@ opt.number = true         -- shows absolute line number on cursor line (when rel
 
 ------------------tab code---------------------
 opt.tabstop = 4        -- number of visual spaces per TAB
-opt.softtabstop = 4    -- number of spaces in tab when editing (but tabs are 8)
 opt.shiftwidth = 4     -- number of spaces to use for autoindent
 opt.expandtab = true   -- tabs are spaces
 opt.smarttab = true    -- backspace deletes a 'shiftwidth' amount of spaces
@@ -14,7 +13,7 @@ opt.shiftround = true  -- round indent to multiple of 'shiftwidth'
 opt.smartindent = true -- insert indents automatically
 opt.autoindent = true  -- copy indent from current line when starting new one
 -----------------------------------------------
-opt.wrap = false       -- set wraping to true
+opt.wrap = false       -- set wraping to false
 opt.ignorecase = true
 opt.smartcase = true
 opt.cursorline = true
@@ -50,28 +49,40 @@ vim.cmd([[
   autocmd BufRead,BufNewFile * call SetFileType()
 ]])
 
+--------------------------- FORCE TABS -----------------------------
+
+local tabsize = 4;
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "make", "go", "c", "cpp", "lua", "python", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+	callback = function()
+		vim.opt_local.expandtab = false
+		vim.opt_local.tabstop = tabsize
+		vim.opt_local.shiftwidth = tabsize
+	end
+})
 
 ---------------------------- Maximum PERFORMANCE ----------------------------
 -- autocmd to clear undo history for large files
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    local file_size = vim.fn.getfsize(vim.fn.expand("%"))
-    if file_size > 100000 then  -- 100KB
-      vim.cmd("wundo! " .. vim.fn.expand("%:p:h") .. "/." .. vim.fn.expand("%:t") .. ".un~")
-    end
-  end,
+	pattern = "*",
+	callback = function()
+		local file_size = vim.fn.getfsize(vim.fn.expand("%"))
+		if file_size > 100000 then -- 100KB
+			vim.cmd("wundo! " .. vim.fn.expand("%:p:h") .. "/." .. vim.fn.expand("%:t") .. ".un~")
+		end
+	end,
 })
 
 
 -- Periodically clean memory
 vim.api.nvim_create_autocmd("BufWritePost", {
-  callback = function()
-    vim.schedule(function()
-      vim.cmd("silent! call luaeval('vim.fn.jobstart([\"sync\"])')")
-    end)
-  end,
+	callback = function()
+		vim.schedule(function()
+			vim.cmd("silent! call luaeval('vim.fn.jobstart([\"sync\"])')")
+		end)
+	end,
 })
 
 -- Set a reasonable limit for undo levels
