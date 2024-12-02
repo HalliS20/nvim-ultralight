@@ -2,7 +2,7 @@ local schemes = {}
 schemes.b = "nightfly"
 schemes.e = "oxocarbon"
 schemes.h = "moonfly"
-local scheme = schemes.b
+local scheme = schemes.h
 
 vim.cmd("colorscheme " .. scheme)
 

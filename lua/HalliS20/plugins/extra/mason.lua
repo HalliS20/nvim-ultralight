@@ -27,7 +27,7 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"tailwindcss",
@@ -50,24 +50,24 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"ts-standard",   -- js linter
-				"prettier",      -- prettier formatter
-				"stylua",        -- lua formatter
-				"isort",         -- python formatter
-				"black",         -- python formatter
-				"pylint",        -- python linter
-				"flake8",        -- python linter
+				"ts-standard", -- js linter
+				"prettier", -- prettier formatter
+				"stylua", -- lua formatter
+				"isort", -- python formatter
+				"black", -- python formatter
+				"pylint", -- python linter
+				"flake8", -- python linter
 				"quick_lint_js", -- js linter
-				"eslint_d",      -- js linter
-				"stylelint",     -- css linter
-				"eslint",        -- js linter
-				"clang-format",  -- c/c++ formatter
-				"luaformatter",  -- lua formatter
-				"stylua",        -- lua formatter
-				"cpplint",       -- c/c++ linter
+				"eslint_d", -- js linter
+				"stylelint", -- css linter
+				"eslint", -- js linter
+				"clang-format", -- c/c++ formatter
+				"luaformatter", -- lua formatter
+				"stylua", -- lua formatter
+				"cpplint", -- c/c++ linter
 				"luacheck",
 				"markdownlint",
-				"gofumpt",       -- go formatter
+				"gofumpt", -- go formatter
 				"golangci-lint", -- go linter
 			},
 		})
