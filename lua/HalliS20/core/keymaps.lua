@@ -39,7 +39,6 @@ vim.keymap.set({ "n", "v" }, "<CR>", ":<up>", def_opts)
 vim.api.nvim_set_keymap("n", "<leader>op", "<CMD>!safari %<CR>", { silent = true, noremap = true })
 
 -----------------------------Better deletes-------------------------------------
-vim.api.nvim_set_option("clipboard", "unnamed,unnamedplus")
 vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true })
 vim.api.nvim_set_keymap("n", "dd", '"_dd', { noremap = true })
 vim.api.nvim_set_keymap("v", "d", '"_d', { noremap = true })
