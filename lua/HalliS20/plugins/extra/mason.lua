@@ -63,7 +63,6 @@ return {
 				"eslint", -- js linter
 				"clang-format", -- c/c++ formatter
 				"luaformatter", -- lua formatter
-				"stylua", -- lua formatter
 				"cpplint", -- c/c++ linter
 				"luacheck",
 				"markdownlint",
