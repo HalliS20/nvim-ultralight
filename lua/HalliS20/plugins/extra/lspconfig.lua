@@ -170,6 +170,12 @@ return {
 			}
 		})
 
+		lspconfig["templ"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "templ" }
+		})
+
 		-- configure emmet language server
 		lspconfig["emmet_ls"].setup({
 			capabilities = capabilities,
