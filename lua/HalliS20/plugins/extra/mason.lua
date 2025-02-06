@@ -54,9 +54,9 @@ return {
 				"ts-standard", -- js linter
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
 				"pylint", -- python linter
+				"autopep8", -- python formatter
+				"yapf",
 				"ruff",
 				"quick_lint_js", -- js linter
 				"eslint_d", -- js linter

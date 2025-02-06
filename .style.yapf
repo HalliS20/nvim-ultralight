@@ -1,0 +1,7 @@
+[style]
+based_on_style = pep8
+use_tabs = true
+coalesce_brackets = true
+dedent_closing_brackets = true
+each_dict_entry_on_separate_line = true
+split_before_first_argument = true

@@ -21,7 +21,7 @@ return {
 				markdown = { "markdownlint" },
 				graphql = { "prettier" },
 				lua = { "lua_format" },
-				python = { "autopep8" },
+				python = { "yapf" },
 				cpp = { "clang_format" },
 				c = { "clang_format" },
 				h = { "clang_format" },
@@ -38,9 +38,10 @@ return {
 			},
 
 			formatters = {
-				autopep8 = {
-					args = { "--indent-with-tabs" }
+				yapf = {
+					args = { "--style", vim.fn.stdpath("config") .. "/.style.yapf" }
 				}
+
 			}
 		})
 		------------------- format key map (moved to none-ls) -------------------
