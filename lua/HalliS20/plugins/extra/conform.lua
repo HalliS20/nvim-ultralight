@@ -21,7 +21,7 @@ return {
 				markdown = { "markdownlint" },
 				graphql = { "prettier" },
 				lua = { "lua_format" },
-				python = { "autopep8", "black" },
+				python = { "autopep8" },
 				cpp = { "clang_format" },
 				c = { "clang_format" },
 				h = { "clang_format" },
@@ -35,9 +35,14 @@ return {
 				lsp_fallback = true,
 				async = false,
 				timeout_ms = 1000
+			},
+
+			formatters = {
+				autopep8 = {
+					args = { "--indent-with-tabs" }
+				}
 			}
 		})
-
 		------------------- format key map (moved to none-ls) -------------------
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format(
