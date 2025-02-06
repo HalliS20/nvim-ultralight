@@ -4,4 +4,7 @@ use_tabs = true
 coalesce_brackets = true
 dedent_closing_brackets = true
 each_dict_entry_on_separate_line = true
+split_arguments_when_comma_terminated = true
 split_before_first_argument = true
+split_complex_comprehension = true
+column_limit = 119 
