@@ -57,7 +57,7 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				"pylint", -- python linter
-				"flake8", -- python linter
+				"ruff",
 				"quick_lint_js", -- js linter
 				"eslint_d", -- js linter
 				"stylelint", -- css linter

@@ -54,7 +54,8 @@ opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 opt.splitright = true
 opt.splitbelow = true
 opt.swapfile = false
-vim.opt.numberwidth = 3
+opt.numberwidth = 3
+opt.fillchars = { eob = ' ' }
 
 
 ----======================= MAXIMUM PERFORMANCE SETTINGS =================================----

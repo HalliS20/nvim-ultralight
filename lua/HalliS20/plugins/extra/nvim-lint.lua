@@ -19,7 +19,7 @@ return {
 			tsx = { "eslint" },
 			jsx = { "eslint" },
 			svelte = { "eslint" },
-			python = { "flake8" },
+			python = { "ruff" },
 			json = { "eslint" },
 			lua = { "luacheck" },
 			c = { "cpplint" },
