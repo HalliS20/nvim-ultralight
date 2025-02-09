@@ -1,3 +1,6 @@
+local path = vim.fn.stdpath("config")
+
+
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
@@ -6,7 +9,7 @@ return {
 		local conform = require("conform")
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { "prettier", "eslint", "prettierd" },
+				javascript = { "prettier", "eslint" },
 				typescript = { "prettier" },
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
@@ -14,9 +17,11 @@ return {
 				jsx = { "prettier" },
 				svelte = { "prettier" },
 				css = { "prettier" },
+				scss = { "prettier" },
+				sass = { "prettier" },
 				less = { "prettier" },
 				html = { "prettier" },
-				json = { "prettier", "prettierd", "eslint" },
+				json = { "prettier", "eslint" },
 				yaml = { "prettier" },
 				markdown = { "markdownlint" },
 				graphql = { "prettier" },
@@ -38,19 +43,33 @@ return {
 			},
 
 			formatters = {
+				prettier = {
+					prepend_args = {
+						"--config-precedence", "prefer-file",
+						"--config", path .. "/.prettierrc"
+					}
+				},
 				yapf = {
-					args = { "--style", vim.fn.stdpath("config") .. "/.style.yapf" }
+					args = { "--style", path .. "/.style.yapf" }
 				},
 				clang_format = {
-					args = { "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format" }
+					args = { "--style=file:" .. path .. "/.clang-format" }
 				}
 
 			}
 		})
 		------------------- format key map (moved to none-ls) -------------------
-		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+		vim.api.nvim_create_user_command("Format", function()
 			conform.format(
 				{ lsp_fallback = true, async = false, timeout_ms = 1000 })
 		end, { desc = "Format file or range (in visual mode)" })
-	end
+	end,
+
+	keys = {
+		{
+			"<leader>mp",
+			"Format",
+			desc = "(Conform) runs formatter"
+		}
+	}
 }

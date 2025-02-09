@@ -1,43 +1,70 @@
+-- For togling telescope
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+	local file_paths = {}
+	for _, item in ipairs(harpoon_files.items) do
+		table.insert(file_paths, item.value)
+	end
+
+	require("telescope.pickers").new({}, {
+		prompt_title = "Harpoon",
+		finder = require("telescope.finders").new_table({
+			results = file_paths,
+		}),
+		previewer = conf.file_previewer({}),
+		sorter = conf.generic_sorter({}),
+	}):find()
+end
+
+
+--////////////////// Actual plugin conf \\\\\\\\\\\\\\\\\\\\\--
 return {
 	"ThePrimeagen/harpoon",
-	branch = "harpoon2",
+	branch       = "harpoon2",
 	dependencies = { "nvim-lua/plenary.nvim" },
-	config = function()
+
+	lazy         = false,
+	keys         = {
+		{
+			"<C-e>",
+			"<cmd>Harpoon<cr>",
+			desc = "(Harpoon) Open window",
+		},
+		{
+			"<leader>a",
+			"<cmd>Harpoon add<cr>",
+			desc = "(Harpoon) Add buffer",
+		},
+	},
+	config       = function()
 		local harpoon = require("harpoon")
 
-		-- REQUIRED
 		harpoon:setup()
-		-- REQUIRED
-
-		local conf = require("telescope.config").values
-		local function toggle_telescope(harpoon_files)
-			local file_paths = {}
-			for _, item in ipairs(harpoon_files.items) do
-				table.insert(file_paths, item.value)
+		local pooner = function(opts)
+			local arg = opts.args
+			local num = tonumber(arg)
+			if arg == "" then
+				toggle_telescope(harpoon:list())
+			elseif arg == "add" then
+				harpoon:list():add()
+			elseif arg == "remove" then
+				harpoon:list():remove()
+			elseif arg == "next" then
+				harpoon:list():next()
+			elseif arg == "prev" then
+				harpoon:list():prev()
+			elseif num then
+				harpoon:list():select(num)
 			end
-
-			require("telescope.pickers").new({}, {
-				prompt_title = "Harpoon",
-				finder = require("telescope.finders").new_table({
-					results = file_paths,
-				}),
-				previewer = conf.file_previewer({}),
-				sorter = conf.generic_sorter({}),
-			}):find()
+		end
+		local completer = function(_)
+			local commands = { "add", "remove", "list", "next", "prev" }
+			return commands
 		end
 
-		vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
-			{ desc = "Open harpoon window" })
-		vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-		vim.keymap.set("n", "<leader>q", function() harpoon:list():remove() end)
 
-		vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-		vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
-		vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
-		vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
-
-		-- Toggle previous & next buffers stored within Harpoon list
-		vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-		vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+		vim.api.nvim_create_user_command('Harpoon', pooner,
+			{ desc = "Open harpoon window", nargs = "?", complete = completer })
 	end,
+
 }

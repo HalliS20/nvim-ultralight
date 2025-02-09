@@ -3,11 +3,7 @@ return {
 	opts = {
 		skip_confirm_for_simple_edits = true,
 	},
-	vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
-	vim.keymap.set("n", "_", "<CMD>Oil<CR>", { desc = "Open parent directory" }),
-	vim.keymap.set("n", "<Leader>l", "<CMD>Oil .<CR>", { desc = "reload oil buffer" }),
-
-	vim.keymap.set("n", "<Leader>.", "<CMD>Oil .<CR>", { desc = "reload oil buffer" }),
+	lazy = false,
 
 
 	preview = {
@@ -22,6 +18,20 @@ return {
 			winblend = 0,
 		},
 	},
-	-- Optional dependencies
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+
+	keys = {
+
+		{
+			"-",
+			"<cmd>Oil<cr>",
+			desc = "(Oil) Open Parent Directory",
+		},
+		{
+			"<leader>.",
+			"<cmd>Oil .<cr>",
+			desc = "(Oil) Reload",
+		},
+
+	}
 }

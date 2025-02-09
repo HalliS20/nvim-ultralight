@@ -1,2 +1,17 @@
-indent_type = "Spaces"
-indent_width = 2
+
+# .stylua.toml
+
+# Sets the column width for formatting
+column_width = 80
+# Indentation settings (use "Tabs" or specify "Spaces" with a number)
+indent_type = "Tabs"
+indent_width = 4
+# Controls whether to format code within comments
+format_code_in_doc_comments = true
+# Quote style for strings ("AutoPreferDouble", "AutoPreferSingle", "ForceDouble", "ForceSingle")
+quote_style = "AutoPreferDouble"
+# Whether to ensure a newline at the end of the file
+no_call_parentheses = false
+# Controls the maximum number of blank lines to keep
+newline_at_eof = true
+

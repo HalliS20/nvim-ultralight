@@ -25,9 +25,15 @@ return {
 				},
 			},
 		})
-		-- Load the extension
 		t.load_extension('zoxide')
-		-- Add a mapping
-		vim.keymap.set("n", "<leader>cd", t.extensions.zoxide.list)
-	end
+		vim.api.nvim_create_user_command("Zoxide", t.extensions.zoxide.list, { desc = "Open zoxide navigation" })
+	end,
+
+	keys = {
+		{
+			"<leader>cd",
+			"<cmd>Zoxide<cr>",
+			desc = "(Zoxide) navigate"
+		},
+	}
 }
