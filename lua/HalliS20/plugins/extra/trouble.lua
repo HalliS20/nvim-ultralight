@@ -21,6 +21,7 @@ local older = {
 
 local new = {
 	"folke/trouble.nvim",
+	vim.keymap.set("n", "<leader>tt", function() require("trouble").toggle() end, { desc = "trouble toggle" }),
 	opts = {}, -- for default options, refer to the configuration section for custom setup.
 	cmd = "Trouble",
 	keys = {
