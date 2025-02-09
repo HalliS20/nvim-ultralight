@@ -40,6 +40,9 @@ return {
 			formatters = {
 				yapf = {
 					args = { "--style", vim.fn.stdpath("config") .. "/.style.yapf" }
+				},
+				clang_format = {
+					args = { "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format" }
 				}
 
 			}

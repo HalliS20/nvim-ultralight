@@ -1,0 +1,8 @@
+AllowShortFunctionsOnASingleLine: None
+BraceWrapping:
+    AfterFunction: false
+    AfterControlStatement: false
+    AfterClass: false
+BreakBeforeBraces: Linux
+IndentWidth: 8
+UseTab: Always

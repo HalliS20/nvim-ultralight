@@ -31,10 +31,10 @@ return {
 
 		}
 
-
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-		require('lint').linters.cpplint.args = { '--filter=-copyright*' }
-
+		lint.linters.cpplint.args = {
+			'--rcfile=' .. vim.fn.stdpath('config') .. '/.cpplintrc'
+		}
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 			group = lint_augroup,
 			callback = function()

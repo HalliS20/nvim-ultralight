@@ -147,7 +147,7 @@ return {
 			flags = { debounce_text_changes = 150 },
 			settings = {
 				clangd = {
-					fallbackFlags = { "-std=c++17" },
+					-- fallbackFlags = { "-std=c++17" },
 					FormatStyle = {
 						BasedOnStyle = "LLVM",
 						UseTab = true,

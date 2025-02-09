@@ -209,12 +209,15 @@ return {
 			filetypes = { "go" }
 		})
 
+
+
+
 		lspconfig["clangd"].setup({
 			cmd = {
 				"clangd", "--background-index", "--suggest-missing-includes",
 				"--clang-tidy", "--header-insertion=iwyu"
 			},
-			filetypes = { "c", "cpp", "objc", "objcpp", "hpp", "h" },
+			filetypes = { "c", "h" }, -- Removed cpp, objc, objcpp, hpp since you're only using C
 			root_dir = function(fname)
 				return lspconfig.util.root_pattern("compile_commands.json",
 					"compile_flags.txt", ".git")(
@@ -227,7 +230,6 @@ return {
 				semanticHighlighting = true
 			},
 			on_attach = function(_, bufnr)
-				-- Set options for the current buffer
 				vim.bo[bufnr].tabstop = 4
 				vim.bo[bufnr].shiftwidth = 4
 				vim.bo[bufnr].expandtab = true
@@ -236,21 +238,24 @@ return {
 				textDocument = {
 					completion = { completionItem = { snippetSupport = true } }
 				},
-				offsetEncoding = { "utf-16" } -- Set offset encoding here
+				offsetEncoding = { "utf-16" }
 			},
 			flags = { debounce_text_changes = 150 },
 			settings = {
 				clangd = {
-					fallbackFlags = { "-std=c++17" },
+					fallbackFlags = { "-std=c11" }, -- Added C standard
 					FormatStyle = {
 						BasedOnStyle = "LLVM",
 						UseTab = true,
 						IndentWidth = 4,
 						TabWidth = 4
-					} -- Set tab size to 4 here
+					}
 				}
 			}
 		})
+
+
+
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,
