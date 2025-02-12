@@ -1,6 +1,5 @@
 local path = vim.fn.stdpath("config")
 
-
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
@@ -39,29 +38,35 @@ return {
 			format_on_save = {
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 1000
+				timeout_ms = 1000,
 			},
 
 			formatters = {
 				prettier = {
 					prepend_args = {
-						"--config-precedence", "prefer-file",
-						"--config", path .. "/.prettierrc"
-					}
+						"--config-precedence",
+						"prefer-file",
+						"--config",
+						path .. "/.prettierrc",
+					},
 				},
-				yapf = {
-					args = { "--style", path .. "/.style.yapf" }
-				},
+				yapf = { args = { "--style", path .. "/.style.yapf" } },
 				clang_format = {
-					args = { "--style=file:" .. path .. "/.clang-format" }
-				}
-
-			}
+					args = { "--style=file:" .. path .. "/.clang-format" },
+				},
+				lua_format = {
+					command = "lua-format",
+					prepend_args = { "--config", path .. "/.lua-format" },
+				},
+			},
 		})
 		------------------- format key map (moved to none-ls) -------------------
 		vim.api.nvim_create_user_command("Format", function()
-			conform.format(
-				{ lsp_fallback = true, async = false, timeout_ms = 1000 })
+			conform.format({
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 1000,
+			})
 		end, { desc = "Format file or range (in visual mode)" })
 	end,
 
@@ -69,7 +74,7 @@ return {
 		{
 			"<leader>mp",
 			"Format",
-			desc = "(Conform) runs formatter"
-		}
-	}
+			desc = "(Conform) runs formatter",
+		},
+	},
 }

@@ -1,0 +1,16 @@
+use_tab: true
+tab_width: 4
+indent_width: 1
+continuation_indent_width: 1
+table_sep: ", "
+spaces_inside_table_braces: true
+spaces_around_equals_in_field: true
+chop_down_table: true
+chop_down_kv_table: true
+break_before_table_rb: true
+break_after_table_lb: true
+column_table_limit: 60
+extra_sep_at_table_end: true
+single_quote_to_double_quote: true
+spaces_inside_functiondef_parens: false
+spaces_inside_functioncall_parens: false

@@ -3,32 +3,30 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true }
+		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 
 	keys = require("HalliS20.plugins.extra.lspconfig.keys"),
 
 	config = function()
-		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
-		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		lspconfig.util.default_config.capabilities = capabilities
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = {
 			Error = " ",
 			Warn = " ",
 			Hint = "󰠠 ",
-			Info = " "
+			Info = " ",
 		}
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+			vim.fn.sign_define(hl, {
+				text = icon,
+				texthl = hl,
+				numhl = "",
+			})
 		end
 
 		local attachment = function(client, _)
@@ -45,19 +43,31 @@ return {
 		lspconfig["elixirls"].setup({ cmd = { "elixir-ls" } })
 		lspconfig["gopls"].setup({})
 
-		local ft = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "jsx", "tsx" }
+		local ft = {
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+			"javascript",
+			"javascriptreact",
+			"jsx",
+			"tsx",
+		}
 		lspconfig["ts_ls"].setup({ filetypes = ft })
 
 		ft = { "sh", "zsh", "bash" }
 		lspconfig["bashls"].setup({ filetypes = ft })
 
-		ft = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" }
+		ft = {
+			"graphql",
+			"gql",
+			"svelte",
+			"typescriptreact",
+			"javascriptreact",
+		}
 		lspconfig["graphql"].setup({ filetypes = ft })
 
 		-- ft = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" }
 		-- lspconfig["emmet_ls"].setup({ filetypes = ft })
-
-
 
 		-- configure svelte server
 		lspconfig["svelte"].setup({
@@ -67,30 +77,34 @@ return {
 					pattern = { "*.js", "*.ts" },
 					callback = function(ctx)
 						if client.name == "svelte" then
-							client.notify("$/onDidChangeTsOrJsFile",
-								{ uri = ctx.file })
+							client.notify("$/onDidChangeTsOrJsFile", {
+								uri = ctx.file,
+							})
 						end
-					end
+					end,
 				})
-			end
+			end,
 		})
 
 		lspconfig["clangd"].setup({
 			cmd = {
-				"clangd", "--background-index", "--suggest-missing-includes",
-				"--clang-tidy", "--header-insertion=iwyu"
+				"clangd",
+				"--background-index",
+				"--suggest-missing-includes",
+				"--clang-tidy",
+				"--header-insertion=iwyu",
 			},
 			filetypes = { "c", "h" }, -- Removed cpp, objc, objcpp, hpp since you're only using C
 			root_dir = function(fname)
 				return lspconfig.util.root_pattern("compile_commands.json",
-					"compile_flags.txt", ".git")(
-					fname) or lspconfig.util.path.dirname(fname)
+				                                   "compile_flags.txt", ".git")(fname) or
+					       lspconfig.util.path.dirname(fname)
 			end,
 			init_options = {
 				clangdFileStatus = true,
 				usePlaceholders = true,
 				completeUnimported = true,
-				semanticHighlighting = true
+				semanticHighlighting = true,
 			},
 			on_attach = function(_, bufnr)
 				vim.bo[bufnr].tabstop = 4
@@ -99,9 +113,11 @@ return {
 			end,
 			capabilities = {
 				textDocument = {
-					completion = { completionItem = { snippetSupport = true } }
+					completion = {
+						completionItem = { snippetSupport = true },
+					},
 				},
-				offsetEncoding = { "utf-16" }
+				offsetEncoding = { "utf-16" },
 			},
 			flags = { debounce_text_changes = 150 },
 			settings = {
@@ -111,17 +127,14 @@ return {
 						BasedOnStyle = "LLVM",
 						UseTab = true,
 						IndentWidth = 4,
-						TabWidth = 4
-					}
-				}
-			}
+						TabWidth = 4,
+					},
+				},
+			},
 		})
-
-
 
 		-- configure lua server (with special settings)
 		lspconfig["lua_ls"].setup({
-			capabilities = capabilities,
 			settings = { -- custom settings for lua
 				Lua = {
 					-- make the language server recognize "vim" global
@@ -130,11 +143,11 @@ return {
 						-- make language server aware of runtime files
 						library = {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.stdpath("config") .. "/lua"] = true
-						}
-					}
-				}
-			}
+							[vim.fn.stdpath("config") .. "/lua"] = true,
+						},
+					},
+				},
+			},
 		})
-	end
+	end,
 }
