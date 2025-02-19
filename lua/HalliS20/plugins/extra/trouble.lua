@@ -15,9 +15,8 @@ local older = {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		}
-	end
+	end,
 }
-
 
 local new = {
 	"folke/trouble.nvim",
@@ -27,35 +26,34 @@ local new = {
 		{
 			"<leader>tt",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Diagnostics (Trouble)",
+			desc = "(Trouble) Diagnostics ",
 		},
 		{
 			"<leader>tT",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnostics (Trouble)",
+			desc = "(Trouble) Buffer Diagnostics (Trouble)",
 		},
 		{
 			"<leader>cs",
 			"<cmd>Trouble symbols toggle focus=false<cr>",
-			desc = "Symbols (Trouble)",
+			desc = "(Trouble) Symbols",
 		},
 		{
 			"<leader>cl",
 			"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-			desc = "LSP Definitions / references / ... (Trouble)",
+			desc = "(Trouble) LSP Definitions / references / ... ",
 		},
 		{
 			"<leader>xL",
 			"<cmd>Trouble loclist toggle<cr>",
-			desc = "Location List (Trouble)",
+			desc = "(Trouble) Location List ",
 		},
 		{
 			"<leader>xQ",
 			"<cmd>Trouble qflist toggle<cr>",
-			desc = "Quickfix List (Trouble)",
+			desc = "(Trouble) Quickfix List ",
 		},
 	},
 }
-
 
 return new
