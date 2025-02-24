@@ -1,14 +1,13 @@
 linters:
     disable-all: true # Disable everything first
     enable:
-        # Core linters you currently have
         - errcheck
         - gosimple
         - govet
         - ineffassign
         - staticcheck
         - unused
-        # Additional recommended linters
+        # Gosec and gocritic sometimes cause issues
         - gosec
         - gocritic
         - nilerr
