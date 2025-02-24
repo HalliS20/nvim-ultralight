@@ -10,3 +10,6 @@ set("n", "<C-f>c", "<cmd>normal zfac<cr>", def)
 
 def.desc = "(Folds) Toggle current fold"
 set("n", "<C-f>t", "<cmd>normal za<cr>", def)
+
+vim.opt.foldtext = ""
+

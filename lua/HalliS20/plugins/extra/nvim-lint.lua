@@ -31,19 +31,44 @@ return {
 
 		}
 
-		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-		lint.linters.cpplint.args = {
-			'--rcfile=' .. vim.fn.stdpath('config') .. '/.cpplintrc'
-		}
-		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			group = lint_augroup,
-			callback = function()
-				lint.try_lint()
-			end,
+		local lint_augroup = vim.api.nvim_create_augroup("lint", {
+			clear = true,
 		})
 
-		vim.keymap.set("n", "<leader>l", function()
-			lint.try_lint()
-		end, { desc = "Trigger linting for current file" })
+		lint.linters.cpplint.args = {
+			"--rcfile=" .. vim.fn.stdpath("config") .. "/.cpplintrc",
+		}
+
+		-- lint.linters.golangcilint.args = {
+		-- 	"run",
+		-- 	"--print-issued-lines",
+		-- 	"--print-linter-name",
+		-- 	"--config",
+		-- 	vim.fn.stdpath("config") .. "/golangci.yml",
+		-- }
+
+		lint.linters.golangcilint.args = {
+			"run",
+			"--config",
+			vim.fn.stdpath("config") .. "/golangci.yml",
+			"--out-format=colored-line-number",
+		}
+
+		lint.linters.golangcilint.stdin = false
+		lint.linters.golangcilint.append_fname = false
+		lint.linters.golangcilint.parser = require("lint.parser").from_errorformat(
+			                                   "%f:%l:%c: %m")
+
+		vim.api.nvim_create_autocmd({
+			"BufEnter",
+			"BufWritePost",
+			"InsertLeave",
+		}, {
+			group = lint_augroup,
+			callback = function() lint.try_lint() end,
+		})
+
+		vim.keymap.set("n", "<leader>l", function() lint.try_lint() end,
+		               { desc = "Trigger linting for current file" })
 	end,
 }
