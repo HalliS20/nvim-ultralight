@@ -36,22 +36,22 @@ return {
 			desc = "(Harpoon) Add buffer",
 		},
 		{
-			"<C-1>",
+			"<C-a>1",
 			"<cmd>Harpoon 1<cr>",
 			desc = "(Harpoon) Nav to Buffer 1",
 		},
 		{
-			"<C-2>",
+			"<C-a>2",
 			"<cmd>Harpoon 2<cr>",
 			desc = "(Harpoon) Nav to Buffer 2",
 		},
 		{
-			"<C-3>",
+			"<C-a>3",
 			"<cmd>Harpoon 3<cr>",
 			desc = "(Harpoon) Nav to Buffer 3",
 		},
 		{
-			"<C-4>",
+			"<C-a>4",
 			"<cmd>Harpoon 4<cr>",
 			desc = "(Harpoon) Nav to Buffer 4",
 		},

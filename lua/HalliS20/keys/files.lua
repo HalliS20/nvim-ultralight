@@ -4,7 +4,7 @@ local set = vim.keymap.set -- for conciseness
 vim.cmd("command! -nargs=0 WAQ wa | qa")
 vim.cmd("cabbrev waq WAQ")
 
---- NAVIGATING WITHIN A FILE using arrows
+----\/\/\/\/ LINE START AND END NAV \/\/\/\/\/
 set("i", "<Right>", function()
 	return vim.fn.col(".") == vim.fn.col("$") and "<Down><Home>" or "<Right>"
 end, { expr = true })
@@ -13,6 +13,7 @@ set("i", "<Left>",
     function() return vim.fn.col(".") == 1 and "<Up><End>" or "<Left>" end,
     { expr = true }) -- nav to next/prev line at line ends/starts
 
+---- \/\/\/\/ BETTER NAV IN TABBED FILES
 -- j and k normal navving
 local function smart_up_down(key)
 	local count = vim.v.count1

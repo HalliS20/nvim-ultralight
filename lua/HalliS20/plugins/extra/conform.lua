@@ -33,6 +33,9 @@ return {
 				elixir = { "mixfmt" },
 				go = { "gofumpt" },
 				templ = { "templ" },
+				bash = { "shfmt" },
+				sh = { "shfmt" },
+				zsh = { "shfmt" },
 			},
 			--------------- format on save (moved to none-ls) -------------------
 			format_on_save = {

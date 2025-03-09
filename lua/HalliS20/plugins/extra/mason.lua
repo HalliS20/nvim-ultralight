@@ -69,6 +69,7 @@ return {
 				"markdownlint",
 				"gofumpt", -- go formatter
 				"golangci-lint", -- go linter
+				"shfmt",
 			},
 		})
 	end,

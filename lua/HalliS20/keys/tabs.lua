@@ -13,14 +13,8 @@ set({ "n" }, "<C-.>", "<cmd>tabn<CR>", {
 set({ "n" }, "<C-,>", "<cmd>tabp<CR>", {
 	desc = "Go to previous tab",
 })
-set({ "n" }, "<C-k>", "<cmd>tabn<CR>", {
-	desc = "Go to next tab",
-})
-set({ "n" }, "<C-j>", "<cmd>tabp<CR>", {
-	desc = "Go to previous tab",
-})
 set({ "n" }, "<leader>xx", ":bd<bar>bnext<CR>", {
 	noremap = true,
 	silent = true,
-	desc = "cluse current buffer",
+	desc = "close current buffer",
 })
