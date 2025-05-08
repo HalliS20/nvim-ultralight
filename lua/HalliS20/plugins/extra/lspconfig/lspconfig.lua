@@ -42,6 +42,7 @@ return {
 		lspconfig["pyright"].setup({})
 		lspconfig["elixirls"].setup({ cmd = { "elixir-ls" } })
 		lspconfig["gopls"].setup({})
+		lspconfig["graphql"].setup({})
 
 		local ft = {
 			"typescript",

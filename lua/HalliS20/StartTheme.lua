@@ -1,4 +1,5 @@
 local schemes = {}
+schemes.a = "monokai-pro-default"
 schemes.b = "nightfly"
 schemes.e = "oxocarbon"
 schemes.h = "moonfly"
