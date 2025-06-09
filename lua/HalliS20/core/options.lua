@@ -103,6 +103,28 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
 
+----======================= DIAGNOSTIC SETTINGS =================================----
+-- Configure diagnostics display
+vim.diagnostic.config({
+	virtual_text = {
+		enabled = true,
+		source = "if_many",
+		prefix = "●",
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
+
 ----======================= MISCELLANEOUS SETTINGS =================================----
 ----------------------- set zsh files to bash syntax for treesitter --------------------
 vim.cmd([[autocmd BufNewFile,BufRead *.zsh set filetype=bash]])
