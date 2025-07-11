@@ -44,6 +44,7 @@ return {
 				"marksman",
 				"elixirls",
 				"templ",
+				"rust_analyzer",
 			},
 			-- auto-install configured servers (with lspconfig)
 			automatic_installation = true, -- not the same as ensure_installed
@@ -70,6 +71,7 @@ return {
 				"gofumpt", -- go formatter
 				"golangci-lint", -- go linter
 				"shfmt",
+				"rustfmt", -- rust formatter
 			},
 		})
 	end,

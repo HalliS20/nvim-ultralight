@@ -36,6 +36,7 @@ return {
 				bash = { "shfmt" },
 				sh = { "shfmt" },
 				zsh = { "shfmt" },
+				rust = { "rustfmt" },
 			},
 			--------------- format on save (moved to none-ls) -------------------
 			format_on_save = {

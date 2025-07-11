@@ -28,6 +28,7 @@ return {
 			hpp = { "cpplint" },
 			markdown = { "markdownlint" },
 			go = { "golangcilint" },
+			rust = { "clippy" },
 
 		}
 
